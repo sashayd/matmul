@@ -8,7 +8,7 @@ To run the test as it is now (on Linux):
 
 1. Run the Python script `generate_c_files_from_templates.py`, which generates files such as `mm3x24.c` using the template file `mm_template.c` and `mm_time.c` using the template file `mm_time_template.c`.
    It uses `precopmiler.py` to process the `@...` instructions and it uses settings from the config files `kernel_sizes.txt` and `matrix_size.txt`.
-2. Run the shell script `mm_time.sh` which compiles `mm_time.c` (it uses `-lblas` (for comparing with BLAS) and `-fopenmp` (for multithreading) flags) and then runs `mm_time.out`.
+2. Run the shell script `mm_time.sh` which compiles `mm_time.c` and then runs `mm_time.out`.
    For example, on my laptop I got the following output (this shows the number of giga FLOP/s obtained when multiplying 1440x1440 matrices):
    ```
    BLAS implementation, num of gflops: 661.409937
@@ -28,3 +28,5 @@ To run the test as it is now (on Linux):
    Kernel 5x8, num of gflops: 218.152263
    Kernel 6x8, num of gflops: 233.878741
    ```
+
+Note: `mm_time.sh` uses the `gcc` flags `-lblas` (for comparing with BLAS) and `-fopenmp` (for multithreading). `mm_template.c` includes `immintrin.h` for `__mm256` AVX intrinsics.
